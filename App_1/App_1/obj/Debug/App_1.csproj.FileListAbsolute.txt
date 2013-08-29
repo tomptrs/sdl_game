@@ -1,0 +1,6 @@
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\bin\Debug\App_1.exe.config
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\bin\Debug\App_1.exe
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\bin\Debug\App_1.pdb
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\obj\Debug\App_1.exe
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\obj\Debug\App_1.pdb
+C:\Users\tom_ptrs\Documents\ProjectICT\TEMP\App_1\App_1\obj\Debug\App_1.csprojResolveAssemblyReference.cache
