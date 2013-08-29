@@ -21,10 +21,10 @@ namespace App_1
             {0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1}
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,2,1,1,1,1,1,1,1,1}
         };
 
-        public Blok[,] spriteTileArray = new Blok[4,30];
+        public bgObject[,] spriteTileArray = new bgObject[4,30];
 
         private Hero mHero;
        // private Enemy mEnemy;
@@ -73,6 +73,12 @@ namespace App_1
                     if (intTileArray[i, j] == 1)
                     {
                         spriteTileArray[i, j] = new Blok(mVideo, j * 15, (100+i*100));
+                    }
+
+
+                    if (intTileArray[i, j] == 2)
+                    {
+                        spriteTileArray[i, j] = new Ladder(mVideo, j * 15, (100 + i * 100));
                     }
  
                 }

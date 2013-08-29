@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace App_1
 {
-    public class Blok
+    public class Blok:bgObject
     {
         private Surface mVideo;
         private Surface DrawableObject;
         private int x, y;
-        public  Rectangle colRect;
+        //public  Rectangle colRect;
 
         public Blok(Surface vid,int _x, int _y)
         {
@@ -25,10 +25,15 @@ namespace App_1
             colRect = new Rectangle(x, y, 15,1);
         }
 
-        public void Draw()
+        public override void Draw()
         {
-            mVideo.Blit(DrawableObject, new Rectangle(x,y,15,15));
+            mVideo.Blit(DrawableObject, new Rectangle(x, y, 15, 15));
         }
+
+        //public void Draw()
+        //{
+        //    mVideo.Blit(DrawableObject, new Rectangle(x,y,15,15));
+        //}
 
 
     }
