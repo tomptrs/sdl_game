@@ -27,7 +27,7 @@ namespace App_1
         public Blok[,] spriteTileArray = new Blok[4,30];
 
         private Hero mHero;
-        private Enemy mEnemy;
+       // private Enemy mEnemy;
         private List<Enemy> enemies;
         SpriteCollection col;
         
@@ -46,9 +46,9 @@ namespace App_1
             
             //start with 10 enemies
 
-            mEnemy = new Enemy(mVideo);
+           // mEnemy = new Enemy(mVideo);
             enemies = new List<Enemy>();
-            enemies.Add(mEnemy);
+            //enemies.Add(mEnemy);
             enemies.Add(new Enemy(mVideo));
             enemies.Add(new Enemy(mVideo));
             enemies.Add(new Enemy(mVideo));
@@ -85,15 +85,21 @@ namespace App_1
             System.Timers.Timer myTime = new System.Timers.Timer();
             myTime.Elapsed += myTime_Elapsed;
 
-            myTime.Interval = 5000;
+            myTime.Interval = 3000;
             myTime.Start();
             Events.Tick += Events_Tick;
             Events.Run();
         }
 
+
+        int aantalEnemies = 10;
         void myTime_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            enemies[teller].start = true;
+            if (teller < aantalEnemies)
+            {
+                enemies[teller].start = true;
+            }
+            
             teller++;
         }
 
@@ -123,9 +129,11 @@ namespace App_1
             if (stateObj.jump == false && stateObj.onGround == false)
                 mHero.yVal++;
 
-            if (mEnemy.onGround == false)
-                mEnemy.yVal++;
-
+            for (int i = 0; i < aantalEnemies; i++)
+            {
+                if (enemies[i].onGround == false)
+                    enemies[i].yVal++;
+            }
             mVideo.Update();
             mVideo.Fill(Color.Black);
 
@@ -136,7 +144,10 @@ namespace App_1
         {
 
             stateObj.onGround = false;
-            mEnemy.onGround = false;
+
+            for (int i = 0; i < aantalEnemies; i++)
+                enemies[i].onGround = false;
+
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 30; j++)
@@ -165,7 +176,16 @@ namespace App_1
  
                         }
                         //bij raken grond met enemy
-                                            }
+                                          
+                    }
+
+                    for (int m = 0; m < aantalEnemies; m++)
+                    {
+                        if (enemies[m].colRect.IntersectsWith(mHero.colRect))
+                        {
+                            Console.WriteLine("RAAAAAAK");
+                        }
+                    }
                         
 
 
