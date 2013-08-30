@@ -19,6 +19,7 @@ namespace App_1
         private int velocityX=2, velocityY=1;
 
         public bool onGround = false;
+        public bool onLadder = false;
         public bool start = false;
         public int yPosBeforeJump = 0;
        
@@ -45,7 +46,7 @@ namespace App_1
             mVideo = vid;
             x = 150;
             y=50;
-            rad = 20;
+            rad = 10;
             Random rand = new Random();
 
             if (rand.NextDouble() >= 0.5)
@@ -53,7 +54,7 @@ namespace App_1
             else
                 velocityX = -2;
             mCir = new Circle((short)x, (short)y, (short)rad);
-            colRect = new Rectangle(x, y+rad , 20, 1);
+            colRect = new Rectangle(x, y+rad , 10, 1);
         }
 
        
@@ -61,7 +62,7 @@ namespace App_1
 
         public void Draw()
         {
-            if(onGround)
+            if(onGround && onLadder == false)
                 xVal += velocityX;
 
             if (xVal < 0 || xVal > 500)

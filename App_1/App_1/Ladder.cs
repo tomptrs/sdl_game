@@ -32,16 +32,17 @@ namespace App_1
             set
             {
                 y = value;
-                colRect.Y= y+rad;
+                colRect.Y= y-30;
             }
         }
         public Ladder(Surface vid,int x,int y)
         {
             mVideo = vid;
             bground = new Surface("Ladder.gif");
-            xVal = x-50;
-            yVal = y-100;
-            colRect = new Rectangle(x-50, y-100, 50, 100);
+           
+            colRect = new Rectangle(x-50, y-120, 50, 150);
+            xVal = x - 50;
+            yVal = y - 85;
         }
 
         public override void Draw()

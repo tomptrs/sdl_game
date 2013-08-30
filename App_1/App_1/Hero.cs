@@ -49,7 +49,7 @@ namespace App_1
 
         public int jump(int tijd, int lastYpos, bool highjump)
         {
-            double value = (highjump == true) ? 8.4 : 1.9;
+            double value = (highjump == true) ? 4.4 : 1.9;
             int result = -(int)((value * Math.Sin(0.8) * tijd) - (0.5 * 0.1 * (tijd * tijd)) + lastYpos);
             
             return result;
@@ -65,6 +65,15 @@ namespace App_1
 
                 if (key == SdlDotNet.Input.Key.RightArrow)
                     xVal = xVal + velocityY;
+
+                if (key == SdlDotNet.Input.Key.UpArrow && stateObj.onLadder == true)
+                    yVal-=5;
+
+                if (key == SdlDotNet.Input.Key.DownArrow && stateObj.onLadder == true)
+                    yVal++;
+
+
+
             }
 
             if (stateObj.jump == true)
@@ -106,6 +115,12 @@ namespace App_1
 
                 if (args.Key == SdlDotNet.Input.Key.RightArrow)
                     key = SdlDotNet.Input.Key.RightArrow;
+
+                if (args.Key == SdlDotNet.Input.Key.UpArrow)
+                    key = SdlDotNet.Input.Key.UpArrow;
+
+                if (args.Key == SdlDotNet.Input.Key.DownArrow)
+                    key = SdlDotNet.Input.Key.DownArrow;
 
                 if (args.Key == SdlDotNet.Input.Key.Space)
                 {

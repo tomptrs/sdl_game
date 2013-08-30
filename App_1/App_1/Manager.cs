@@ -18,10 +18,10 @@ namespace App_1
        
         public byte[,] intTileArray = new byte[,]
         {
-            {0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,2,1,1,1,1,1,1,1,1}
+            {0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},
+            {1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
 
         public bgObject[,] spriteTileArray = new bgObject[4,30];
@@ -132,13 +132,20 @@ namespace App_1
             CheckCollisions();
 
 
-            if (stateObj.jump == false && stateObj.onGround == false)
+            if (stateObj.jump == false && stateObj.onGround == false && stateObj.onLadder == false)
                 mHero.yVal++;
 
             for (int i = 0; i < aantalEnemies; i++)
             {
                 if (enemies[i].onGround == false)
                     enemies[i].yVal++;
+
+                if (enemies[i].onLadder == true)
+                {
+                    //laat vijand naar beneden komen
+                    Console.WriteLine("vijand komt naar beneden");
+                    enemies[i].yVal++;
+                }
             }
             mVideo.Update();
             mVideo.Fill(Color.Black);
@@ -150,10 +157,13 @@ namespace App_1
         {
 
             stateObj.onGround = false;
+            stateObj.onLadder = false;
 
             for (int i = 0; i < aantalEnemies; i++)
+            {
                 enemies[i].onGround = false;
-
+                enemies[i].onLadder = false;
+            }
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 30; j++)
@@ -163,11 +173,20 @@ namespace App_1
                         //bij raken
                         if (spriteTileArray[i, j].colRect.IntersectsWith(mHero.colRect))
                         {
-                            stateObj.onGround = true;
-
-                            if (stateObj.jump)
+                            if (spriteTileArray[i, j] is Blok)
                             {
-                                stateObj.jump = false;
+                                stateObj.onGround = true;
+
+                                if (stateObj.jump)
+                                {
+                                    stateObj.jump = false;
+                                }
+                            }
+
+                            if (spriteTileArray[i, j] is Ladder)
+                            {
+                                stateObj.onLadder = true;
+                                Console.WriteLine("ik raad ladder");
                             }
                         }
 
@@ -175,6 +194,10 @@ namespace App_1
                         {
                             if (spriteTileArray[i, j].colRect.IntersectsWith(enemies[k].colRect))
                             {
+                                if (spriteTileArray[i, j] is Ladder)
+                                {
+                                    enemies[k].onLadder = true;
+                                }
                                 enemies[k].onGround = true;
 
                             }

@@ -27,6 +27,8 @@ namespace App_1
 
         public bool jump = false;
 
+        public bool onLadder = false;
+
         public bool onGround = false;
 
         public int yPosBeforeJump = 0;
